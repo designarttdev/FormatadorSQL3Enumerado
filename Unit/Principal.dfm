@@ -27,9 +27,9 @@ object frPrincipal: TfrPrincipal
     object Memo1: TMemo
       AlignWithMargins = True
       Left = 11
-      Top = 67
+      Top = 11
       Width = 512
-      Height = 602
+      Height = 658
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -38,47 +38,23 @@ object frPrincipal: TfrPrincipal
       CharCase = ecUpperCase
       ScrollBars = ssVertical
       TabOrder = 0
+      WordWrap = False
     end
     object Memo2: TMemo
       AlignWithMargins = True
       Left = 540
-      Top = 67
+      Top = 11
       Width = 512
-      Height = 602
+      Height = 658
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
       Margins.Bottom = 10
       Align = alRight
       CharCase = ecUpperCase
-      ReadOnly = True
       ScrollBars = ssVertical
       TabOrder = 1
-    end
-    object pnlParametros: TPanel
-      Left = 1
-      Top = 1
-      Width = 1061
-      Height = 56
-      Align = alTop
-      TabOrder = 2
-      object rgTipo: TRadioGroup
-        AlignWithMargins = True
-        Left = 31
-        Top = 4
-        Width = 491
-        Height = 48
-        Margins.Left = 30
-        Align = alLeft
-        Caption = 'Selecione o tipo'
-        Columns = 3
-        ItemIndex = 1
-        Items.Strings = (
-          'SELECT'
-          'INSERT'
-          'UPDATE')
-        TabOrder = 0
-      end
+      WordWrap = False
     end
   end
   object pnlFooter: TPanel
@@ -102,7 +78,7 @@ object frPrincipal: TfrPrincipal
       Font.Style = [fsBold]
       ParentFont = False
       TabOrder = 0
-      Visible = False
+      OnClick = btnRemoverFormatacaoClick
     end
     object btnFormatar: TButton
       Left = 1

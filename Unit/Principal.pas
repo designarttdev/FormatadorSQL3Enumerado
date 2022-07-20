@@ -14,6 +14,7 @@ type
     pnlFooter: TPanel;
     btnRemoverFormatacao: TButton;
     btnFormatar: TButton;
+    Memo3: TMemo;
     procedure btnFormatarClick(Sender: TObject);
     procedure btnRemoverFormatacaoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -32,7 +33,7 @@ implementation
 
 procedure TfrPrincipal.btnFormatarClick(Sender: TObject);
 var
-  vAux, vLinha : String;
+  vAux, vTextoLinha, vTextoAux : String;
   i, x : Integer;
   vRecomeca : Boolean;
 begin
@@ -59,21 +60,21 @@ begin
     begin
       if (not (Pos('(', memo2.Lines.Strings[i]) <> 0) and not(Pos(')', memo2.Lines.Strings[i]) <> 0)) then
       begin
-        vLinha := vLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
+        vTextoLinha := vTextoLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
       end
       else if (Pos('VALUES', memo2.Lines.Strings[i]) <> 0) then
       begin
         x := 000;
-        vLinha := vLinha + sLineBreak + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
+        vTextoLinha := vTextoLinha + sLineBreak + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
         vRecomeca := True;
       end
       else
-        vLinha := vLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
+        vTextoLinha := vTextoLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
       x := X + 1;
     end;
 
     memo2.Lines.Clear;
-    memo2.Lines.Add(Trim(Copy(Trim(vLinha), 1, Length(Trim(vLinha)) - 1).Replace('"', '''' + '''')) + ';');
+    memo2.Lines.Add(Trim(Copy(Trim(vTextoLinha), 1, Length(Trim(vTextoLinha)) - 1).Replace('"', '''' + '''')) + ';');
     Memo2.SelectAll;
     memo2.CopyToClipboard;
     ShowMessage('Copiado!');
@@ -97,12 +98,12 @@ begin
     x := 000;
     for i := 0 to Memo2.Lines.Count -1 do
     begin
-      vLinha := vLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
+      vTextoLinha := vTextoLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
       x := X + 1;
     end;
 
     memo2.Lines.Clear;
-    memo2.Lines.Add(Trim(Copy(Trim(vLinha), 1, Length(Trim(vLinha)) - 1).Replace('"', '''' + '''')) + ';');
+    memo2.Lines.Add(Trim(Copy(Trim(vTextoLinha), 1, Length(Trim(vTextoLinha)) - 1).Replace('"', '''' + '''')) + ';');
     Memo2.SelectAll;
     memo2.CopyToClipboard;
     ShowMessage('Copiado!');
@@ -126,34 +127,45 @@ begin
     x := 000;
     for i := 0 to Memo2.Lines.Count -1 do
     begin
-      vLinha := vLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
+      vTextoLinha := vTextoLinha + '{' + FormatFloat('000',x) + '}  ''' + memo2.Lines.Strings[i] + ' '' + ' + sLineBreak;
       x := X + 1;
     end;
 
     memo2.Lines.Clear;
-    memo2.Lines.Add(Trim(Copy(Trim(vLinha), 1, Length(Trim(vLinha)) - 1).Replace('"', '''' + '''')) + ';');
+    memo2.Lines.Add(Trim(Copy(Trim(vTextoLinha), 1, Length(Trim(vTextoLinha)) - 1).Replace('"', '''' + '''')) + ';');
     Memo2.SelectAll;
     memo2.CopyToClipboard;
     ShowMessage('Copiado!');
+  end;
+
+  x := 1;
+  for i := 0 to Memo2.Lines.Count - 1 do
+  begin
+    if Pos(':', Memo2.Lines.Strings[i]) > 0 then
+    begin
+      vTextoAux := Memo2.Lines.Strings[i];
+      Memo3.Lines.Add('vQuery.ParamByName(''' + Copy(vTextoAux, Pos(':', vTextoAux) + 1, Pos(',', vTextoAux) - Pos(':', vTextoAux) -1) + ''').AsString := Auxiliar' + IntToStr(x) + ';');
+      Inc(x);
+    end;
   end;
 end;
 
 procedure TfrPrincipal.btnRemoverFormatacaoClick(Sender: TObject);
 var
   i : integer;
-  vLinha : String;
+  vTextoLinha : String;
 begin
   memo1.Lines.Clear;
 
   for i := 0 to memo2.Lines.Count -1 do
   begin
-    vLinha := Trim(memo2.Lines.Strings[i].Replace('  ', ' ').Replace(''' +', ''));
+    vTextoLinha := Trim(memo2.Lines.Strings[i].Replace('  ', ' ').Replace(''' +', ''));
     if i = memo2.Lines.Count -1 then
     begin
-      memo1.Lines.Add(Copy(vLinha.Replace(''';', ''), Pos('''', vLinha) + 1, Length(vLinha)));
+      memo1.Lines.Add(Copy(vTextoLinha.Replace(''';', ''), Pos('''', vTextoLinha) + 1, Length(vTextoLinha)));
     end
     else
-      memo1.Lines.Add(Copy(vLinha.Replace('''' + '''', ''''), Pos('''', vLinha) + 1, Length(vLinha)));
+      memo1.Lines.Add(Copy(vTextoLinha.Replace('''' + '''', ''''), Pos('''', vTextoLinha) + 1, Length(vTextoLinha)));
   end;
 end;
 

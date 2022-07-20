@@ -14,7 +14,10 @@ type
     pnlFooter: TPanel;
     btnRemoverFormatacao: TButton;
     btnFormatar: TButton;
+    pnlQuery: TPanel;
     Memo3: TMemo;
+    btnCopiarQuery: TButton;
+    procedure btnCopiarQueryClick(Sender: TObject);
     procedure btnFormatarClick(Sender: TObject);
     procedure btnRemoverFormatacaoClick(Sender: TObject);
     procedure FormShow(Sender: TObject);
@@ -30,6 +33,12 @@ var
 implementation
 
 {$R *.dfm}
+
+procedure TfrPrincipal.btnCopiarQueryClick(Sender: TObject);
+begin
+  Memo3.SelectAll;
+  Memo3.CopyToClipboard;
+end;
 
 procedure TfrPrincipal.btnFormatarClick(Sender: TObject);
 var
@@ -139,6 +148,7 @@ begin
   end;
 
   x := 1;
+  Memo3.Lines.Clear;
   for i := 0 to Memo2.Lines.Count - 1 do
   begin
     if Pos(':', Memo2.Lines.Strings[i]) > 0 then

@@ -3,7 +3,7 @@ object frPrincipal: TfrPrincipal
   Top = 0
   BorderStyle = bsDialog
   Caption = 'Converter Script'
-  ClientHeight = 767
+  ClientHeight = 689
   ClientWidth = 1063
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -21,16 +21,16 @@ object frPrincipal: TfrPrincipal
     Left = 0
     Top = 0
     Width = 1063
-    Height = 696
+    Height = 618
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 680
+    ExplicitHeight = 696
     object Memo1: TMemo
       AlignWithMargins = True
       Left = 11
       Top = 11
       Width = 512
-      Height = 487
+      Height = 403
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -40,14 +40,14 @@ object frPrincipal: TfrPrincipal
       ScrollBars = ssVertical
       TabOrder = 0
       WordWrap = False
-      ExplicitHeight = 658
+      ExplicitHeight = 487
     end
     object Memo2: TMemo
       AlignWithMargins = True
       Left = 540
       Top = 11
       Width = 512
-      Height = 487
+      Height = 403
       Margins.Left = 10
       Margins.Top = 10
       Margins.Right = 10
@@ -58,32 +58,58 @@ object frPrincipal: TfrPrincipal
       ScrollBars = ssVertical
       TabOrder = 1
       WordWrap = False
-      ExplicitHeight = 502
+      ExplicitLeft = 543
+      ExplicitHeight = 487
     end
-    object Memo3: TMemo
-      AlignWithMargins = True
-      Left = 11
-      Top = 518
-      Width = 1041
-      Height = 167
-      Margins.Left = 10
-      Margins.Top = 10
-      Margins.Right = 10
-      Margins.Bottom = 10
+    object pnlQuery: TPanel
+      Left = 1
+      Top = 424
+      Width = 1061
+      Height = 193
       Align = alBottom
-      ReadOnly = True
-      ScrollBars = ssVertical
       TabOrder = 2
-      ExplicitTop = 502
+      object Memo3: TMemo
+        AlignWithMargins = True
+        Left = 11
+        Top = 11
+        Width = 862
+        Height = 171
+        Margins.Left = 10
+        Margins.Top = 10
+        Margins.Right = 10
+        Margins.Bottom = 10
+        Align = alLeft
+        ReadOnly = True
+        ScrollBars = ssVertical
+        TabOrder = 0
+        ExplicitTop = 9
+      end
+      object btnCopiarQuery: TButton
+        Left = 886
+        Top = 61
+        Width = 129
+        Height = 70
+        Caption = 'Copiar Par'#226'metros'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Segoe UI'
+        Font.Style = []
+        ParentFont = False
+        TabOrder = 1
+        WordWrap = True
+        OnClick = btnCopiarQueryClick
+      end
     end
   end
   object pnlFooter: TPanel
     Left = 0
-    Top = 696
+    Top = 618
     Width = 1063
     Height = 71
     Align = alBottom
     TabOrder = 1
+    ExplicitTop = 696
     object btnRemoverFormatacao: TButton
       Left = 540
       Top = 1
@@ -99,7 +125,6 @@ object frPrincipal: TfrPrincipal
       ParentFont = False
       TabOrder = 0
       OnClick = btnRemoverFormatacaoClick
-      ExplicitHeight = 85
     end
     object btnFormatar: TButton
       Left = 1
@@ -116,7 +141,6 @@ object frPrincipal: TfrPrincipal
       ParentFont = False
       TabOrder = 1
       OnClick = btnFormatarClick
-      ExplicitHeight = 85
     end
   end
 end
